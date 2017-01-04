@@ -71,8 +71,14 @@ public final class QuoteSyncJob {
             while (iterator.hasNext()) {
                 String symbol = iterator.next();
 
-
                 Stock stock = quotes.get(symbol);
+
+                if(stock.getName() == null) {
+                    // This is an invalid symbol, log and continue the iteration
+                    Timber.e(symbol + " is invalid.");
+                    continue;
+                }
+
                 StockQuote quote = stock.getQuote();
 
                 float price = quote.getPrice().floatValue();
