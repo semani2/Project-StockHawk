@@ -90,7 +90,11 @@ class StockAdapter extends RecyclerView.Adapter<StockAdapter.StockViewHolder> {
             holder.change.setText(percentage);
         }
 
-
+        //Accessibility help
+        String name = cursor.getString(Contract.Quote.POSITION_NAME);
+        if(name != null) {
+            holder.symbol.setContentDescription(context.getResources().getString(R.string.cont_desc_symbol, name));
+        }
     }
 
     @Override
