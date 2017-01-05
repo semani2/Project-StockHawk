@@ -76,29 +76,41 @@ public class StockWidgetRemoteViewsService extends RemoteViewsService {
                 }
 
                 RemoteViews views = new RemoteViews(getPackageName(), R.layout.widget_list_item);
+                String symbol = data.getString(INDEX_STOCK_SYMBOL);
+                float stockPrice = data.getFloat(INDEX_STOCK_PRICE);
+                String stockName = data.getString(INDEX_STOCK_NAME);
 
-                
+                views.setTextViewText(R.id.widget_symbol_text, symbol);
+                views.setTextViewText(R.id.widget_price_text, String.valueOf(stockPrice));
+
+                setViewsContentDesc(views, stockName);
+
+                return views;
             }
 
             @Override
             public RemoteViews getLoadingView() {
-                return null;
+                return new RemoteViews(getPackageName(), R.layout.widget_list_item);
             }
 
             @Override
             public int getViewTypeCount() {
-                return 0;
+                return 1;
             }
 
             @Override
             public long getItemId(int i) {
-                return 0;
+                return i;
             }
 
             @Override
             public boolean hasStableIds() {
-                return false;
+                return true;
             }
-        }
+
+            private void setViewsContentDesc(RemoteViews views, String description) {
+                views.setContentDescription(R.id.widget_symbol_text, description);
+            }
+        };
     }
 }
