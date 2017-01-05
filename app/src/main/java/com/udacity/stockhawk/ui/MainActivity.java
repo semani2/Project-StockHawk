@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.app.LoaderManager;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
@@ -41,9 +44,27 @@ public class MainActivity extends AppCompatActivity implements LoaderManager.Loa
     TextView error;
     private StockAdapter adapter;
 
+    private static final String STOCK_DIALOG_TAG = "stock_dialog_tag";
+
     @Override
     public void onClick(String symbol) {
         Timber.d("Symbol clicked: %s", symbol);
+
+        showStockHistoryDialog(symbol);
+    }
+
+    private void showStockHistoryDialog(String symbol) {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+
+        Fragment prev = getSupportFragmentManager().findFragmentByTag(STOCK_DIALOG_TAG);
+        if(prev != null) {
+            transaction.remove(prev);
+        }
+
+        transaction.addToBackStack(null);
+
+        DialogFragment fragment = StockHistoryFragment.newInstance(symbol);
+        fragment.show(transaction, STOCK_DIALOG_TAG);
     }
 
     @Override
