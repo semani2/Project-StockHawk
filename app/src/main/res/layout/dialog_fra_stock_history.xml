@@ -4,13 +4,13 @@
     android:layout_height="wrap_content"
     android:scrollbars="none">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
         xmlns:tools="http://schemas.android.com/tools">
         <LinearLayout
-            android:orientation="vertical" android:layout_width="match_parent"
+            android:orientation="vertical"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <RelativeLayout
@@ -23,11 +23,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:id="@+id/name"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/white"
                     android:layout_alignParentStart="true"
                     android:layout_centerVertical="true"
                     android:textSize="20sp"
-                    tools:text="Google, Inc."
                     android:layout_marginStart="16dp"
                     android:layout_toEndOf="@+id/closeButton"
                     android:ellipsize="end"/>
@@ -46,8 +45,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="10dp" />
 
-            <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="?android:attr/listPreferredItemHeight"
                 android:gravity="center_vertical"

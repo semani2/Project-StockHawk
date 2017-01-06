@@ -177,6 +177,19 @@ public class StockHistoryFragment extends DialogFragment implements LoaderManage
         changePriceTextView.setText(changeText);
         nameTextView.setText(name);
 
+        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(getGraphDataPointsFromHistory(history));
+
+        stockHistoryChart.setTitle(getString(R.string.stock_chart_title));
+        stockHistoryChart.addSeries(series);
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // Nothing to here
+    }
+
+    private DataPoint[] getGraphDataPointsFromHistory(String history) {
+
         history = history.replace("\n", " ");
         history = history.replace(",", "");
         String[] historyData = history.split(" ");
@@ -197,15 +210,7 @@ public class StockHistoryFragment extends DialogFragment implements LoaderManage
             i++;
         }
 
-        LineGraphSeries<DataPoint> series = new LineGraphSeries<>(dataPoints);
-
-        stockHistoryChart.setTitle("Price over the past couple of years");
-        stockHistoryChart.addSeries(series);
-    }
-
-    @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
-        // Nothing to here
+        return dataPoints;
     }
 
     private class StockHistoryData {

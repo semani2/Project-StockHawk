@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="50dp"
-    xmlns:tools="http://schemas.android.com/tools"
     android:paddingStart="16dp"
     android:paddingEnd="16dp"
     android:gravity="center_vertical">
@@ -14,7 +14,7 @@
         android:gravity="start|center_vertical"
         tools:text="GOOG"
         android:layout_alignParentStart="true"
-        android:textColor="#bbbbbb"
+        android:textColor="@color/widget_stock_symbol_text_color"
         android:textSize="20sp"
         android:textAllCaps="true"/>
 
@@ -25,7 +25,7 @@
         android:layout_marginEnd="10sp"
         tools:text="1000.00"
         android:layout_alignParentEnd="true"
-        android:textColor="#aaaaaa"
+        android:textColor="@color/widget_stock_price_text_color"
         android:textSize="15sp"/>
 
 </RelativeLayout>

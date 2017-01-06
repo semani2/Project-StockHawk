@@ -11,6 +11,9 @@ import android.net.NetworkInfo;
 
 import com.udacity.stockhawk.data.Contract;
 import com.udacity.stockhawk.data.PrefUtils;
+import com.udacity.stockhawk.event.InvalidStockEvent;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +34,7 @@ import yahoofinance.quotes.stock.StockQuote;
 public final class QuoteSyncJob {
 
     private static final int ONE_OFF_ID = 2;
-    private static final String ACTION_DATA_UPDATED = "com.udacity.stockhawk.ACTION_DATA_UPDATED";
+    public  static final String ACTION_DATA_UPDATED = "com.udacity.stockhawk.ACTION_DATA_UPDATED";
     private static final int PERIOD = 300000;
     private static final int INITIAL_BACKOFF = 10000;
     private static final int PERIODIC_ID = 1;
@@ -75,6 +78,7 @@ public final class QuoteSyncJob {
 
                 if(stock.getName() == null) {
                     // This is an invalid symbol, log and continue the iteration
+                    EventBus.getDefault().post(new InvalidStockEvent(symbol));
                     Timber.e(symbol + " is invalid.");
                     continue;
                 }
@@ -170,10 +174,6 @@ public final class QuoteSyncJob {
             JobScheduler scheduler = (JobScheduler) context.getSystemService(Context.JOB_SCHEDULER_SERVICE);
 
             scheduler.schedule(builder.build());
-
-
         }
     }
-
-
 }
